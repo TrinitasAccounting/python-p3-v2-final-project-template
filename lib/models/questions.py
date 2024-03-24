@@ -2,4 +2,147 @@
 from models.__init__ import CONN, CURSOR
 
 class Questions:
-    pass
+    
+    all = []
+
+    def __init__(self, level, text, correct_answer, w_answer1, w_answer2, w_answer3):
+        self.level = level
+        self.text = text
+        self.correct_answer = correct_answer
+        self.w_answer1 = w_answer1
+        self.w_answer2 = w_answer2
+        self.w_answer3 = w_answer3
+        self.id = None
+
+    @property
+    def level(self):
+        return self._level
+
+    @level.setter
+    def level(self, level_param):
+        if(isinstance(level_param, int)) and (0 < level_param < 11):
+            self._level = level_param
+        else: 
+            raise ValueError("Level has to be between 1 and 10")
+
+    # Properties for all other class attributes
+
+
+
+
+
+
+    # class ORM methods for SQL link
+
+    @classmethod
+    def create_table(cls):
+        #new table that stores the instances of questions created
+        sql = """
+            CREATE TABLE IF NOT EXISTS questions (
+                id INTEGER PRIMARY KEY,
+                level INTEGER,
+                text TEXT,
+                correct_answer TEXT,
+                w_answer1 TEXT,
+                w_answer2 TEXT,
+                w_answer3 TEXT)
+            """
+
+        CURSOR.execute(sql)
+
+
+    @classmethod
+    def drop_table(cls):
+        #dropping the questions table
+        sql = """
+            DROP TABLE IF EXIST questions;
+        """
+
+        CURSOR.execute(sql)
+
+
+    def save(self):
+        # inserting a new row into our questions database
+        sql = """ 
+            INSERT INTO questions (level, text, correct_answer, w_answer1, w_answer2, w_answer3)
+            VALUES (?,?,?,?,?,?)
+        """
+
+        CURSOR.execute(sql, (self.level, self.text, self.correct_answer, self.w_answer1, self.w_answer2, self.w_answer3))
+        CONN.commit()
+
+        self.id = CURSOR.lastrowid
+
+        Questions.all.append(self)
+
+
+    @classmethod
+    def create(cls, level, text, correct_answer, w_answer1, w_answer2, w_answer3):
+        # Creates a new instance of the questions class and saves the object
+        question = cls(level, text, correct_answer, w_answer1, w_answer2, w_answer3)
+        question.save()
+        return question
+
+    
+# _________________I think this one isn't correct either
+    @classmethod
+    def instance_from_db(cls, row):
+        # returns a object from the questions table matching the values
+        question = cls(row[1], row[2], row[3], row[4], row[5], row[6])
+        question.id = row[0]
+        return question
+
+
+    @classmethod
+    def get_all(cls):
+        # returns list containing a question object per row in the table
+        sql = """ 
+            SELECT *
+            FROM questions
+        """
+
+        rows = CURSOR.execute(sql).fetchall()
+
+        cls.all = [cls.instance_from_db(row) for row in rows]
+        return cls.all
+
+    
+    @classmethod
+    def find_by_id(cls, id):
+        # return a question that corresponds to the table row that was input
+        sql = """ 
+            SELECT * 
+            FROM questions 
+            WHERE id = ?
+        """
+
+        row = CURSOR.execute(sql, (id,)).fetchone()
+
+        if row:
+            return cls.instance_from_db(row)
+        else: 
+            return None
+
+
+#___________________________Wrong, need to watch the lectures to solve this
+    def update (self):
+        # Update the table row for a question instance
+        sql = """ 
+            UPDATE questions
+            SET level = ?, text = ?, correct_answer = ?, w_answer1 = ?, w_answer2 = ?, w_answer3 = ?
+            WHERE id = ?
+        """
+
+        CURSOR.execute(sql, (self.level, self.text, self.correct_answer, self.w_answer1, self.w_answer2, self.w_answer3, self.id))
+        CONN.commit()
+
+
+
+
+
+
+
+
+
+
+

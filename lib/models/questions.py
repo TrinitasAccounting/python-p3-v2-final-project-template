@@ -208,6 +208,10 @@ class Questions:
         return [Questions.instance_from_db(row) for row in rows]
 
 
+    def __repr__ (self):
+        return (f'____Level: {self.level}, Question => {self.text}____')
+
+
 
 
 

@@ -84,11 +84,13 @@ def exit_program():
 
 
 def start_new_game():
-    # player_name = input("\nPlease type the name of the player: ")
-    # q_level = 0
-    # current_score = 0
+    player_name = input("\nPlease type the name of the player: ")
+    q_level = 0
+    current_score = 0
 
-    # Player.create(player_name, q_level, current_score)
+    player1 = Player.create(player_name, q_level, current_score)
+
+    current_score = player1.current_score
 
 
     question_level_current = 1
@@ -100,11 +102,12 @@ def start_new_game():
     x = True
     while(x):
         print(f'Level {question_level_current}\n\n')
-        question_output(current_question, question_level_current)
+        question_output_BBB(current_question, question_level_current)
         try:
             user_input = input("Please type the letter of your answer choice\n")
-            if(user_input == 'a'):
+            if(user_input == 'b'):
                 print("correct")
+                current_score += 100
 # _______________________________________-
                 question_level_current = 2
                 question_list = Questions.find_by_level(question_level_current)
@@ -113,11 +116,12 @@ def start_new_game():
                     # game_running(1, current_question)
                 while(x):
                     print(f'Level {question_level_current}\n\n')
-                    question_output(current_question, question_level_current)
+                    question_output_AAA(current_question, question_level_current)
                     try:
                         user_input = input("Please type the letter of your answer choice\n")
                         if(user_input == 'a'):
                             print("correct")
+                            current_score += 100
                             # _______________________________
                             question_level_current = 3
                             question_list = Questions.find_by_level(question_level_current)
@@ -126,24 +130,242 @@ def start_new_game():
                                 # game_running(1, current_question)
                             while(x):
                                 print(f'Level {question_level_current}\n\n')
-                                question_output(current_question, question_level_current)
+                                question_output_CCC(current_question, question_level_current)
                                 try:
                                     user_input = input("Please type the letter of your answer choice\n")
-                                    if(user_input == 'a'):
+                                    if(user_input == 'c'):
                                         print("correct")
+                                        current_score += 100
+                                        print('You Win The Game, Congratulations')
+                                        print(f'Score: {current_score}')
+                                        x = False
                                         # _______________________________
+                                        # question_level_current = 4
+                                        # question_list = Questions.find_by_level(question_level_current)
+                                        # index_value = 0
+                                        # current_question = question_list[index_value]
+                                        #     # game_running(1, current_question)
+                                        # while(x):
+                                        #     print(f'Level {question_level_current}\n\n')
+                                        #     question_output_CCC(current_question, question_level_current)
+                                        #     try:
+                                        #         user_input = input("Please type the letter of your answer choice\n")
+                                        #         if(user_input == 'c'):
+                                        #             print("correct")
+                                        #             # _______________________________
+                                        #             question_level_current = 5
+                                        #             question_list = Questions.find_by_level(question_level_current)
+                                        #             index_value = 0
+                                        #             current_question = question_list[index_value]
+                                        #                 # game_running(1, current_question)
+                                        #             while(x):
+                                        #                 print(f'Level {question_level_current}\n\n')
+                                        #                 question_output_CCC(current_question, question_level_current)
+                                        #                 try:
+                                        #                     user_input = input("Please type the letter of your answer choice\n")
+                                        #                     if(user_input == 'c'):
+                                        #                         print("correct")
+                                        #                         # _______________________________
+                                        #                         question_level_current = 6
+                                        #                         question_list = Questions.find_by_level(question_level_current)
+                                        #                         index_value = 0
+                                        #                         current_question = question_list[index_value]
+                                        #                             # game_running(1, current_question)
+                                        #                         while(x):
+                                        #                             print(f'Level {question_level_current}\n\n')
+                                        #                             question_output_CCC(current_question, question_level_current)
+                                        #                             try:
+                                        #                                 user_input = input("Please type the letter of your answer choice\n")
+                                        #                                 if(user_input == 'c'):
+                                        #                                     print("correct")
+                                        #                                     # _______________________________
+                                        #                                     question_level_current = 7
+                                        #                                     question_list = Questions.find_by_level(question_level_current)
+                                        #                                     index_value = 0
+                                        #                                     current_question = question_list[index_value]
+                                        #                                         # game_running(1, current_question)
+                                        #                                     while(x):
+                                        #                                         print(f'Level {question_level_current}\n\n')
+                                        #                                         question_output_CCC(current_question, question_level_current)
+                                        #                                         try:
+                                        #                                             user_input = input("Please type the letter of your answer choice\n")
+                                        #                                             if(user_input == 'c'):
+                                        #                                                 print("correct")
+                                        #                                                 # _______________________________
+                                        #                                                 question_level_current = 8
+                                        #                                                 question_list = Questions.find_by_level(question_level_current)
+                                        #                                                 index_value = 0
+                                        #                                                 current_question = question_list[index_value]
+                                        #                                                     # game_running(1, current_question)
+                                        #                                                 while(x):
+                                        #                                                     print(f'Level {question_level_current}\n\n')
+                                        #                                                     question_output_CCC(current_question, question_level_current)
+                                        #                                                     try:
+                                        #                                                         user_input = input("Please type the letter of your answer choice\n")
+                                        #                                                         if(user_input == 'c'):
+                                        #                                                             print("correct")
+                                        #                                                             # _______________________________
+                                        #                                                             question_level_current = 9
+                                        #                                                             question_list = Questions.find_by_level(question_level_current)
+                                        #                                                             index_value = 0
+                                        #                                                             current_question = question_list[index_value]
+                                        #                                                                 # game_running(1, current_question)
+                                        #                                                             while(x):
+                                        #                                                                 print(f'Level {question_level_current}\n\n')
+                                        #                                                                 question_output_CCC(current_question, question_level_current)
+                                        #                                                                 try:
+                                        #                                                                     user_input = input("Please type the letter of your answer choice\n")
+                                        #                                                                     if(user_input == 'c'):
+                                        #                                                                         print("correct")
+                                        #                                                                         # _______________________________
+                                        #                                                                         question_level_current = 10
+                                        #                                                                         question_list = Questions.find_by_level(question_level_current)
+                                        #                                                                         index_value = 0
+                                        #                                                                         current_question = question_list[index_value]
+                                        #                                                                             # game_running(1, current_question)
+                                        #                                                                         while(x):
+                                        #                                                                             print(f'Level {question_level_current}\n\n')
+                                        #                                                                             question_output_CCC(current_question, question_level_current)
+                                        #                                                                             try:
+                                        #                                                                                 user_input = input("Please type the letter of your answer choice\n")
+                                        #                                                                                 if(user_input == 'c'):
+                                        #                                                                                     print("correct")
+                                        #                                                                                     print("YOU WIN YAYYYYYY")
+                                        #                                                                                     x = False
+                                        #                                                                                     # _______________________________
 
+
+                                        #                                                                                     # _______________________________
+                                                                                                                            
+                                        #                                                                                 elif(user_input == 'b'):
+                                        #                                                                                     print("incorrect answer b")
+                                        #                                                                                     x = False
+                                        #                                                                                 elif(user_input == 'a'):
+                                        #                                                                                     print("incorrect answer a")
+                                        #                                                                                     x = False
+                                        #                                                                                 elif(user_input == 'd'):
+                                        #                                                                                     print("incorrect answer d") 
+                                        #                                                                                     x = False
+                                        #                                                                                 else:
+                                        #                                                                                     print("Please try again a,b,c,d")
+                                        #                                                                             except:
+                                        #                                                                                 print("Invalid input! Please try again!\n")
+
+                                        #                                                                         # _______________________________
+                                                                                                                
+                                        #                                                                     elif(user_input == 'b'):
+                                        #                                                                         print("incorrect answer b")
+                                        #                                                                         x = False
+                                        #                                                                     elif(user_input == 'a'):
+                                        #                                                                         print("incorrect answer a")
+                                        #                                                                         x = False
+                                        #                                                                     elif(user_input == 'd'):
+                                        #                                                                         print("incorrect answer d") 
+                                        #                                                                         x = False
+                                        #                                                                     else:
+                                        #                                                                         print("Please try again a,b,c,d")
+                                        #                                                                 except:
+                                        #                                                                     print("Invalid input! Please try again!\n")
+
+                                        #                                                             # _______________________________
+                                                                                                    
+                                        #                                                         elif(user_input == 'b'):
+                                        #                                                             print("incorrect answer b")
+                                        #                                                             x = False
+                                        #                                                         elif(user_input == 'a'):
+                                        #                                                             print("incorrect answer a")
+                                        #                                                             x = False
+                                        #                                                         elif(user_input == 'd'):
+                                        #                                                             print("incorrect answer d") 
+                                        #                                                             x = False
+                                        #                                                         else:
+                                        #                                                             print("Please try again a,b,c,d")
+                                        #                                                     except:
+                                        #                                                         print("Invalid input! Please try again!\n")
+
+                                        #                                                 # _______________________________
+                                                                                        
+                                        #                                             elif(user_input == 'b'):
+                                        #                                                 print("incorrect answer b")
+                                        #                                                 x = False
+                                        #                                             elif(user_input == 'a'):
+                                        #                                                 print("incorrect answer a")
+                                        #                                                 x = False
+                                        #                                             elif(user_input == 'd'):
+                                        #                                                 print("incorrect answer d") 
+                                        #                                                 x = False
+                                        #                                             else:
+                                        #                                                 print("Please try again a,b,c,d")
+                                        #                                         except:
+                                        #                                             print("Invalid input! Please try again!\n")
+
+                                        #                                     # _______________________________
+                                                                            
+                                        #                                 elif(user_input == 'b'):
+                                        #                                     print("incorrect answer b")
+                                        #                                     x = False
+                                        #                                 elif(user_input == 'a'):
+                                        #                                     print("incorrect answer a")
+                                        #                                     x = False
+                                        #                                 elif(user_input == 'd'):
+                                        #                                     print("incorrect answer d") 
+                                        #                                     x = False
+                                        #                                 else:
+                                        #                                     print("Please try again a,b,c,d")
+                                        #                             except:
+                                        #                                 print("Invalid input! Please try again!\n")
+
+                                        #                         # _______________________________
+                                                                
+                                        #                     elif(user_input == 'b'):
+                                        #                         print("incorrect answer b")
+                                        #                         x = False
+                                        #                     elif(user_input == 'a'):
+                                        #                         print("incorrect answer a")
+                                        #                         x = False
+                                        #                     elif(user_input == 'd'):
+                                        #                         print("incorrect answer d") 
+                                        #                         x = False
+                                        #                     else:
+                                        #                         print("Please try again a,b,c,d")
+                                        #                 except:
+                                        #                     print("Invalid input! Please try again!\n")
+
+                                        #             # _______________________________
+                                                    
+                                        #         elif(user_input == 'b'):
+                                        #             print("incorrect answer b")
+                                        #             x = False
+                                        #         elif(user_input == 'a'):
+                                        #             print("incorrect answer a")
+                                        #             x = False
+                                        #         elif(user_input == 'd'):
+                                        #             print("incorrect answer d") 
+                                        #             x = False
+                                        #         else:
+                                        #             print("Please try again a,b,c,d")
+                                        #     except:
+                                        #         print("Invalid input! Please try again!\n")
 
                                         # _______________________________
                                         
                                     elif(user_input == 'b'):
                                         print("incorrect answer b")
+                                        player1.current_score = current_score
+                                        player1.update()
+                                        print(f'Score: {player1.current_score}\n')
                                         x = False
-                                    elif(user_input == 'c'):
-                                        print("incorrect answer c")
+                                    elif(user_input == 'a'):
+                                        print("incorrect answer a")
+                                        player1.current_score = current_score
+                                        player1.update()
+                                        print(f'Score: {player1.current_score}\n')
                                         x = False
                                     elif(user_input == 'd'):
                                         print("incorrect answer d") 
+                                        player1.current_score = current_score
+                                        player1.update()
+                                        print(f'Score: {player1.current_score}\n')
                                         x = False
                                     else:
                                         print("Please try again a,b,c,d")
@@ -155,12 +377,21 @@ def start_new_game():
                             
                         elif(user_input == 'b'):
                             print("incorrect answer b")
+                            player1.current_score = current_score
+                            player1.update()
+                            print(f'Score: {current_score}\n')
                             x = False
                         elif(user_input == 'c'):
                             print("incorrect answer c")
+                            player1.current_score = current_score
+                            player1.update()
+                            print(f'Score: {current_score}\n')
                             x = False
                         elif(user_input == 'd'):
                             print("incorrect answer d") 
+                            player1.current_score = current_score
+                            player1.update()
+                            print(f'Score: {current_score}\n')
                             x = False
                         else:
                             print("Please try again a,b,c,d")
@@ -169,14 +400,23 @@ def start_new_game():
 # ________________________________________
 
 
-            elif(user_input == 'b'):
-                print("incorrect answer b")
+            elif(user_input == 'a'):
+                print("incorrect answer a")
+                player1.current_score = current_score
+                player1.update()
+                print(f'Score: {current_score}\n')
                 x = False
             elif(user_input == 'c'):
                 print("incorrect answer c")
+                player1.current_score = current_score
+                player1.update()
+                print(f'Score: {current_score}\n')
                 x = False
             elif(user_input == 'd'):
                 print("incorrect answer d") 
+                player1.current_score = current_score
+                player1.update()
+                print(f'Score: {current_score}\n')
                 x = False
             else:
                 print("Please try again a,b,c,d")
@@ -187,12 +427,33 @@ def start_new_game():
 
 
 
-def question_output(current_question, question_level_current):
+def question_output_AAA(current_question, question_level_current):
     print(f'Question {question_level_current}:    {current_question.text}\n')
     print(f'\ta) \t{current_question.correct_answer}')
     print(f'\tb) \t{current_question.w_answer1}')
     print(f'\tc) \t{current_question.w_answer2}')
     print(f'\td) \t{current_question.w_answer3}')
+
+def question_output_BBB(current_question, question_level_current):
+    print(f'Question {question_level_current}:    {current_question.text}\n')
+    print(f'\ta) \t{current_question.w_answer1}')
+    print(f'\tb) \t{current_question.correct_answer}')
+    print(f'\tc) \t{current_question.w_answer2}')
+    print(f'\td) \t{current_question.w_answer3}')
+
+def question_output_CCC(current_question, question_level_current):
+    print(f'Question {question_level_current}:    {current_question.text}\n')
+    print(f'\ta) \t{current_question.w_answer1}')
+    print(f'\tb) \t{current_question.w_answer2}')
+    print(f'\tc) \t{current_question.correct_answer}')
+    print(f'\td) \t{current_question.w_answer3}')
+
+def question_output_DDD(current_question, question_level_current):
+    print(f'Question {question_level_current}:    {current_question.text}\n')
+    print(f'\ta) \t{current_question.w_answer1}')
+    print(f'\tb) \t{current_question.w_answer2}')
+    print(f'\tc) \t{current_question.w_answer3}')
+    print(f'\td) \t{current_question.correct_answer}')
 
 
 

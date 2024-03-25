@@ -20,6 +20,12 @@ if __name__ == "__main__":
     Questions.create(2,"How much water is in my water bottle", "1 gallon", "2 gallon", "None", "I dont drink water")
     Questions.create(3,"Pounds to Kilograms", "2.2", "1.2", "1.6", "2.6")
     Questions.create(4,"First man on the moon", "Armstrong", "Carl", "Kevin", "Steve")
+    Questions.create(5,"First man on the moon", "Armstrong", "Carl", "Kevin", "Steve")
+    Questions.create(6,"First man on the moon", "Armstrong", "Carl", "Kevin", "Steve")
+    Questions.create(7,"First man on the moon", "Armstrong", "Carl", "Kevin", "Steve")
+    Questions.create(8,"First man on the moon", "Armstrong", "Carl", "Kevin", "Steve")
+    Questions.create(9,"First man on the moon", "Armstrong", "Carl", "Kevin", "Steve")
+    Questions.create(10,"First man on the moon", "Armstrong", "Carl", "Kevin", "Steve")
 
     Player.create("John Smith", 100, 777)
 

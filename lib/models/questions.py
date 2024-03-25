@@ -25,9 +25,40 @@ class Questions:
         else: 
             raise ValueError("Level has to be between 1 and 10")
 
-    # Properties for all other class attributes
+    @property
+    def text(self):
+        return self._text
+
+    @text.setter
+    def text(self, text_param):
+        if(isinstance(text_param, str)):
+            self._text = text_param
+        else: 
+            raise ValueError("Question text needs to be a string longer than 5 characters")
+    
+
+    # @property
+    # def correct_answer(self):
+    #     return self._correct_answer
+
+    # @correct_answer.setter
+    # def correct_answer(self, correct_answer_param):
+    #     if(isinstance(correct_answer_param, str)):
+    #         self._correct_answer = correct_answer_param
+    #     else: 
+    #         raise ValueError("The correct answer needs to be a string")
 
 
+    # @property
+    # def w_answer1(self):
+    #     return self._correct_answer
+
+    # @correct_answer.setter
+    # def correct_answer(self, correct_answer_param):
+    #     if(isinstance(correct_answer_param, str)):
+    #         self._correct_answer = correct_answer_param
+    #     else: 
+    #         raise ValueError("The correct answer needs to be a string")
 
 
 
@@ -124,7 +155,7 @@ class Questions:
             return None
 
 
-#___________________________Wrong, need to watch the lectures to solve this
+#___________________________Wrong, need to watch the lectures to solve this_______________________________________
     def update (self):
         # Update the table row for a question instance
         sql = """ 
@@ -135,6 +166,46 @@ class Questions:
 
         CURSOR.execute(sql, (self.level, self.text, self.correct_answer, self.w_answer1, self.w_answer2, self.w_answer3, self.id))
         CONN.commit()
+
+
+    def delete(self):
+        #Delete the row corresponding to the current questions instance
+        sql = """ 
+            DELETE FROM questions
+            WHERE id = ?
+        """
+
+        CURSOR.execute(sql, (self.id,))
+        CONN.commit()
+
+        Questions.all = [question for question in Questions.all if question.id != self.id]
+
+
+
+# This should be on the players class and selecting all questions corresponding to the current level the player is on. Then random integer filter the questions to output on
+    # def player_level(self):
+    #     from model.player import Player
+
+    #     sql = """ 
+    #         SELECT * 
+    #         FROM 
+    #     """
+
+    @classmethod
+    def find_by_level(cls, level):
+        # return a question that corresponds to the table row that was input
+        sql = """ 
+            SELECT * 
+            FROM questions 
+            WHERE level = ?
+        """
+
+        rows = CURSOR.execute(sql, (level,)).fetchall()
+
+        # cls.all = [cls.instance_from_db(row) for row in rows]
+        # return cls.all
+
+        return [Questions.instance_from_db(row) for row in rows]
 
 
 

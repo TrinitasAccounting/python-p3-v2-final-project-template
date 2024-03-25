@@ -8,13 +8,19 @@ from models.__init__ import CONN, CURSOR
 
 if __name__ == "__main__":
     Questions.create_table()
+    Player.create_table()
 
     CURSOR.execute("DELETE FROM questions")
+    CURSOR.execute("DELETE FROM player")
     CONN.commit()
 
 
-
     Questions.create(1,"What color is the sky", "Blue", "Red", "Green", "Yellow")
+    Questions.create(1,"Grass is what color", "Green", "Red", "Blue", "Yellow")
+    Questions.create(2,"How much water is in my water bottle", "1 gallon", "2 gallon", "None", "I dont drink water")
+
+    Player.create("John Smith", 100, 777)
+
 
 
 

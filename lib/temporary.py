@@ -27,10 +27,36 @@
 
 
 
-from random import randrange
-print(randrange(0,4))
+# from random import randrange
+# print(randrange(0,4))
 
 # print(random.randint(0,4))
+
+
+
+# full = """c) Yellow"""
+# length = len(full)
+
+# letter = full[slice(3,length)]
+
+# print(letter)
+
+def addition_function_BBB():
+    return 7777
+
+
+def combination(letters):
+    proper_text = "addition_function_" + letters
+    proper_text()
+
+
+print(combination("BBB"))
+
+
+
+
+
+
 
 
 

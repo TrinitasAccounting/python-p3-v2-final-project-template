@@ -31,6 +31,7 @@ if __name__ == "__main__":
     Questions.create(8,"First man on the moon", "Armstrong", "Carl", "Kevin", "Steve")
     Questions.create(9,"First man on the moon", "Armstrong", "Carl", "Kevin", "Steve")
     Questions.create(10,"First man on the moon", "Armstrong", "Carl", "Kevin", "Steve")
+    
 
     Player.create("John Smith", 100, 777)
 

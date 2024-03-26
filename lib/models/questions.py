@@ -1,6 +1,12 @@
 
 from models.__init__ import CONN, CURSOR
 
+
+# new_question = Questions(2, "Sky is blue",)
+
+# new_question.level 
+
+
 class Questions:
     
     all = []
@@ -191,6 +197,8 @@ class Questions:
     #         FROM 
     #     """
 
+
+# Change level to level_id
     @classmethod
     def find_by_level(cls, level):
         # return a question that corresponds to the table row that was input
@@ -206,10 +214,11 @@ class Questions:
         # return cls.all
 
         return [Questions.instance_from_db(row) for row in rows]
+        
 
 
     def __repr__ (self):
-        return (f'____Level: {self.level}, Question => {self.text}____')
+        return (f'id: {self.id}     Level: {self.level}, Question => {self.text}\n')
 
 
 

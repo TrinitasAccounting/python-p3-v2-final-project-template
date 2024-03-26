@@ -1,8 +1,11 @@
 # lib/helpers.py
 
 
+from random import randrange
+
 from models.questions import Questions
 from models.player import Player
+from models.high_scores import High_Scores
 
 
 
@@ -85,7 +88,7 @@ def exit_program():
 
 def start_new_game():
     player_name = input("\nPlease type the name of the player: ")
-    q_level = 0
+    q_level = 1
     current_score = 0
 
     player1 = Player.create(player_name, q_level, current_score)
@@ -94,8 +97,10 @@ def start_new_game():
 
 
     question_level_current = 1
+    player1.question_level = question_level_current
     question_list = Questions.find_by_level(question_level_current)
-    index_value = 0
+    length = len(question_list)
+    index_value = randrange(0,length)
     current_question = question_list[index_value]
         # game_running(1, current_question)
 
@@ -110,7 +115,9 @@ def start_new_game():
                 current_score += 100
 # _______________________________________-
                 question_level_current = 2
+                player1.question_level = question_level_current
                 question_list = Questions.find_by_level(question_level_current)
+                length = len(question_list)
                 index_value = 0
                 current_question = question_list[index_value]
                     # game_running(1, current_question)
@@ -124,6 +131,7 @@ def start_new_game():
                             current_score += 100
                             # _______________________________
                             question_level_current = 3
+                            player1.question_level = question_level_current
                             question_list = Questions.find_by_level(question_level_current)
                             index_value = 0
                             current_question = question_list[index_value]
@@ -354,18 +362,21 @@ def start_new_game():
                                         player1.current_score = current_score
                                         player1.update()
                                         print(f'Score: {player1.current_score}\n')
+                                        add_player_to_high_scores(player1.name, player1.question_level, player1.current_score)
                                         x = False
                                     elif(user_input == 'a'):
                                         print("incorrect answer a")
                                         player1.current_score = current_score
                                         player1.update()
                                         print(f'Score: {player1.current_score}\n')
+                                        add_player_to_high_scores(player1.name, player1.question_level, player1.current_score)
                                         x = False
                                     elif(user_input == 'd'):
                                         print("incorrect answer d") 
                                         player1.current_score = current_score
                                         player1.update()
                                         print(f'Score: {player1.current_score}\n')
+                                        add_player_to_high_scores(player1.name, player1.question_level, player1.current_score)
                                         x = False
                                     else:
                                         print("Please try again a,b,c,d")
@@ -380,18 +391,21 @@ def start_new_game():
                             player1.current_score = current_score
                             player1.update()
                             print(f'Score: {current_score}\n')
+                            add_player_to_high_scores(player1.name, player1.question_level, player1.current_score)
                             x = False
                         elif(user_input == 'c'):
                             print("incorrect answer c")
                             player1.current_score = current_score
                             player1.update()
                             print(f'Score: {current_score}\n')
+                            add_player_to_high_scores(player1.name, player1.question_level, player1.current_score)
                             x = False
                         elif(user_input == 'd'):
                             print("incorrect answer d") 
                             player1.current_score = current_score
                             player1.update()
                             print(f'Score: {current_score}\n')
+                            add_player_to_high_scores(player1.name, player1.question_level, player1.current_score)
                             x = False
                         else:
                             print("Please try again a,b,c,d")
@@ -405,18 +419,21 @@ def start_new_game():
                 player1.current_score = current_score
                 player1.update()
                 print(f'Score: {current_score}\n')
+                add_player_to_high_scores(player1.name, player1.question_level, player1.current_score)
                 x = False
             elif(user_input == 'c'):
                 print("incorrect answer c")
                 player1.current_score = current_score
                 player1.update()
                 print(f'Score: {current_score}\n')
+                add_player_to_high_scores(player1.name, player1.question_level, player1.current_score)
                 x = False
             elif(user_input == 'd'):
                 print("incorrect answer d") 
                 player1.current_score = current_score
                 player1.update()
                 print(f'Score: {current_score}\n')
+                add_player_to_high_scores(player1.name, player1.question_level, player1.current_score)
                 x = False
             else:
                 print("Please try again a,b,c,d")
@@ -465,6 +482,22 @@ def question_output_DDD(current_question, question_level_current):
 
 
 
+def is_new_high_score():
+    print(High_Scores.get_top_five())
+
+
+def minimum_high_score():
+    player2 = High_Scores.minimum_of_top_five()
+    print(player2)
+    
+
+def add_player_to_high_scores(name, highest_level, final_score):
+    High_Scores.create(name, highest_level, final_score)
+
+
+
+
+
 # def game_running(question_level_current, current_question):
 #     answer_was_correct = ""
 #     while(True):
@@ -509,12 +542,6 @@ def question_output_DDD(current_question, question_level_current):
 
 
 
-
-
-
-
-
-
 def add_question():
     q_level = input("\nPlease enter the level of your new question: ")
     q_level = int(q_level)
@@ -531,7 +558,68 @@ def add_question():
 
 
 
+def see_all_questions():
+    print(Questions.get_all())
 
 
-    # print(f'Your question is {q_text} and is a level {q_level} question')
+def delete_question():
+    user_input_id = input("id of question to delete: ")
+    question = Questions.find_by_id(user_input_id)
+    question.delete()
 
+
+# def see_all_questions():
+#     print(Questions.get_all())
+
+
+def delete_high_score():
+    user_input_id = input("id of high score to delete: ")
+    score = High_Scores.find_by_id(user_input_id)
+    if(score):
+        score.delete()
+        print("High Score successfully deleted")
+    else:
+        print("\nHigh Score not found!\n")
+
+
+
+def update_question():
+    user_input_id = input("Please input the id of the question you want to update: ")
+    question = Questions.find_by_id(user_input_id)
+    if(question):
+        user_input_what_to_update = input("Which would you like to update (level, text, correct_answer, w_answer1, w_answer2, w_answer3): ")
+        if(user_input_what_to_update == "level"):
+            level_input = input("Type the new level: ")
+            question.level = level_input
+            question.update()
+            print("question has been successfully updated")
+        elif(user_input_what_to_update == "text"):
+            text_input = input("Type the new text: ")
+            question.text = text_input
+            question.update()
+            print("question has been successfully updated")
+        elif(user_input_what_to_update == "correct_answer"):
+            correct_input = input("Type the new correct answer: ")
+            question.correct_answer = correct_input
+            question.update()
+            print("question has been successfully updated")
+        elif(user_input_what_to_update == "w_answer1"):
+            wrong_input1 = input("Type the new wrong answer 1: ")
+            question.w_answer1 = wrong_input1
+            question.update()
+            print("question has been successfully updated")
+        elif(user_input_what_to_update == "w_answer2"):
+            wrong_input2 = input("Type the new wrong answer 2: ")
+            question.w_answer2 = wrong_input2
+            question.update()
+            print("question has been successfully updated")
+        elif(user_input_what_to_update == "w_answer3"):
+            wrong_input3 = input("Type the new wrong answer 3: ")
+            question.w_answer3 = wrong_input3
+            question.update()
+            print("question has been successfully updated")
+        else:
+            print("\nThat attribute doesn't exist, please try again\n")
+
+    else:
+        print("\nThe question id you entered doesn't exist, please try again\n")

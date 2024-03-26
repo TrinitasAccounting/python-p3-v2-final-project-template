@@ -425,6 +425,13 @@ def start_new_game():
 
 
 
+    # How we can add teh high scores table in there___________
+    # if(player1.current_score > high_score):
+        # update the high score table
+    
+
+
+
 
 
 def question_output_AAA(current_question, question_level_current):

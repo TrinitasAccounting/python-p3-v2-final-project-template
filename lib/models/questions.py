@@ -2,9 +2,6 @@
 from models.__init__ import CONN, CURSOR
 
 
-# new_question = Questions(2, "Sky is blue",)
-
-# new_question.level 
 
 
 class Questions:
@@ -42,29 +39,6 @@ class Questions:
         else: 
             raise ValueError("Question text needs to be a string longer than 5 characters")
     
-
-    # @property
-    # def correct_answer(self):
-    #     return self._correct_answer
-
-    # @correct_answer.setter
-    # def correct_answer(self, correct_answer_param):
-    #     if(isinstance(correct_answer_param, str)):
-    #         self._correct_answer = correct_answer_param
-    #     else: 
-    #         raise ValueError("The correct answer needs to be a string")
-
-
-    # @property
-    # def w_answer1(self):
-    #     return self._correct_answer
-
-    # @correct_answer.setter
-    # def correct_answer(self, correct_answer_param):
-    #     if(isinstance(correct_answer_param, str)):
-    #         self._correct_answer = correct_answer_param
-    #     else: 
-    #         raise ValueError("The correct answer needs to be a string")
 
 
 
@@ -187,15 +161,6 @@ class Questions:
         Questions.all = [question for question in Questions.all if question.id != self.id]
 
 
-
-# This should be on the players class and selecting all questions corresponding to the current level the player is on. Then random integer filter the questions to output on
-    # def player_level(self):
-    #     from model.player import Player
-
-    #     sql = """ 
-    #         SELECT * 
-    #         FROM 
-    #     """
 
 
 # Change level to level_id
